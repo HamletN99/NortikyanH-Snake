@@ -28,7 +28,7 @@ function gameloop() {
 
 function gameDraw() {
     context.fillStyle = "rgb( 180, 250, 213)";
-    context.fillRect( 0, 0, screenWidth, screenHeight);
+    context.fillRect(0, 0, screenWidth, screenHeight);
 }
 
 function snakeInitalize() {
@@ -36,21 +36,24 @@ function snakeInitalize() {
     snakeLength = 5;
     snakeSize = 20;
     
-    for(var index = snakeLength - 1; index <=0; index--){
+    for(var index = snakeLength - 1; index >=0; index--){
         snake.push( {
-            x:index,
+            x: index,
             y: 0
         });
     }
 }
 
 function snakeDraw(){
-    for(var index = 0; index < snakeLength; index++){
+    for(var index = 0; index < snake.length; index++){
         context.fillStyle = "white";
-        context.fillRect(snake[index].x*snakeSize, snake[index].y*snakeSize, snakeSize, snakeSize,snakeSize);
+        context.fillRect(snake[index].x * snakeSize, snake[index].y * snakeSize, snakeSize, snakeSize);
     }
 }
 
 function snakeUpdate(){
+    var snakeHeadX = snake[0].x;
+    var snakeHeadY = snake[0].y; 
     
+    snakeHeadX++;
 }
