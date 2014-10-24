@@ -76,7 +76,7 @@ function snakeInitalize() {
 
 function snakeDraw(){
     for(var index = 0; index < snake.length; index++){
-        context.fillStyle = "white";
+        context.fillStyle = "red";
         context.fillRect(snake[index].x * snakeSize, snake[index].y * snakeSize, snakeSize, snakeSize);
  
     }
@@ -89,9 +89,17 @@ function snakeUpdate(){
     if(snakeDirection == "down"){
         snakeHeadY++;
     }
-     else if(snakeDirection=="right"){
+     else if(snakeDirection== "right"){
         snakeHeadX++;
     }
+    else if(snakeDirection== "up"){
+        snakeHeadY--;
+    }
+    else if(snakeDirection== "left"){
+        snakeHeadX--;
+    }
+    
+    checkFoodCollisions();
     
     var snakeTail = snake.pop ();
     snakeTail.x = snakeHeadX;
@@ -113,7 +121,7 @@ function foodInitaliize(){
 }
 
 function foodDraw(){
-    context.fillStyle = "white";
+    context.fillStyle = "blue";
     context.fillRect(food.x * snakeSize, food.y * snakeSize, snakeSize, snakeSize);
 }
 
@@ -136,8 +144,25 @@ function keyboardHandler (event){
     if(event.keyCode == "39" && snakeDirection != "left"){
         snakeDirection = "right";
     }    
-        else if(event.keyCode == "40" && snakeDirection !="up"){
+    else if(event.keyCode == "40" && snakeDirection !="up"){
             snakeDirection = "down";
         }
+    else if(event.keyCode == "37" && snakeDirection !="right"){
+            snakeDirection = "left";
+        }
+    else if(event.keyCode == "38" && snakeDirection !="down"){
+            snakeDirection = "up";
+        }
     
+}
+
+/*-----------------------------------------------------------------------------
+ * Collision Handling
+ *----------------------------------------------------------------------------- 
+ */
+
+function checkFoodCollisions (){
+    if(){
+        
+    }
 }
