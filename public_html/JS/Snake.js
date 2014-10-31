@@ -16,7 +16,9 @@ var screenheight;
 
 var gameState;
 var gameOverMenu;
+var startScreenMenu;
 var restartButton;
+var playButton;
 var playHUD;
 var scoreBoard;
 
@@ -25,7 +27,7 @@ var scoreBoard;
  *-----------------------------------------------------------------------------
  */
 gameInitalize();
-snakeInitalize();
+snakeInitialize();
 foodInitaliize();
 setInterval(gameLoop, 1000 / 30);
 
@@ -40,7 +42,8 @@ function gameInitalize() {
 
     screenWidth = window.innerWidth;
     screenHeight = window.innerHeight;
-
+ 
+    //
     canvas.width = screenWidth;
     canvas.height = screenHeight;
 
@@ -49,19 +52,24 @@ function gameInitalize() {
     gameOverMenu = document.getElementById("gameOver");
     centerMenuPosition (gameOverMenu);
     
+    startScreenMenu = document.getElementById("startScreen");
+    
+    playButton = document.getElementById("playButton");
+    playButton.addEventListener("click", gameRestart); 
+    
     restartButton = document.getElementById("restartButton");
     restartButton.addEventListener("click", gameRestart);
     
     playHUD= document.getElementById("playHUD");
     scoreBoard = document.getElementById("scoreBoard");
     
-    setState("PLAY");
+    setState("startScreen");
 }
 
 function gameLoop() {
      gameDraw();
      drawScoreBoard();
-    if (gameState === "PLAY") {
+    if (gameState === "startScreen") {
         snakeUpdate();
         snakeDraw();
         foodDraw();
@@ -76,10 +84,10 @@ function gameDraw() {
 }
 
 function gameRestart(){
-    snakeInitialize();
-    foodInitalize();
+    snakeInitaliize();
+    foodInitaliize();
     hideMenu(gameOverMenu);
-    setState("PLAY");
+    setState("startScreen");
 }
 
 /*-----------------------------------------------------------------------------
@@ -87,7 +95,7 @@ function gameRestart(){
  *-----------------------------------------------------------------------------
  */
 
-function snakeInitalize() {
+function snakeInitialize() {
     snake = [];
     snakeLength = 1;
     snakeSize = 20;
@@ -204,6 +212,9 @@ function checkWallCollisions(snakeHeadX, snakeHeadY) {
     if (snakeHeadX * snakeSize >= screenWidth || snakeHeadX * snakeSize < 0) {
         setState("GAME OVER");
     }
+    else if (snakeHeadY * snakeSize >= screenHeight || snakeHeadY * snakeSize < 0) {
+        setState("GAME OVER");
+    }
 }
 
 function checkSnakeCollisions(snakeHeadX, snakeHeadY){
@@ -237,7 +248,7 @@ function showMenu(state){
     if(state === "GAME OVER"){
         displayMenu(gameOverMenu);
     }
-    else if(state == "PLAY"){
+    else if(state === "startScreen"){
         displayMenu(playHUD);
     }
 }
