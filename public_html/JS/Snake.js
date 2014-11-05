@@ -16,9 +16,7 @@ var screenheight;
 
 var gameState;
 var gameOverMenu;
-var startScreenMenu;
 var restartButton;
-var playButton;
 var playHUD;
 var scoreBoard;
 
@@ -26,9 +24,9 @@ var scoreBoard;
  * Executing Game Code
  *-----------------------------------------------------------------------------
  */
-gameInitalize();
+gameInitialize();
 snakeInitialize();
-foodInitaliize();
+foodInitialize();
 setInterval(gameLoop, 1000 / 30);
 
 /*-----------------------------------------------------------------------------
@@ -36,40 +34,34 @@ setInterval(gameLoop, 1000 / 30);
  *-----------------------------------------------------------------------------
  */
 
-function gameInitalize() {
+function gameInitialize() {
     var canvas = document.getElementById("game-screen");
     context = canvas.getContext("2d");
 
     screenWidth = window.innerWidth;
     screenHeight = window.innerHeight;
- 
-    //
+
     canvas.width = screenWidth;
     canvas.height = screenHeight;
 
     document.addEventListener("keydown", keyboardHandler);
     
     gameOverMenu = document.getElementById("gameOver");
-    centerMenuPosition (gameOverMenu);
-    
-    startScreenMenu = document.getElementById("startScreen");
-    
-    playButton = document.getElementById("playButton");
-    playButton.addEventListener("click", gameRestart); 
+    centerMenuPosition(gameOverMenu);
     
     restartButton = document.getElementById("restartButton");
     restartButton.addEventListener("click", gameRestart);
     
-    playHUD= document.getElementById("playHUD");
+    playHUD = document.getElementById("playHUD");
     scoreBoard = document.getElementById("scoreBoard");
     
-    setState("startScreen");
+    setState("PLAY");
 }
 
 function gameLoop() {
      gameDraw();
      drawScoreBoard();
-    if (gameState === "startScreen") {
+    if (gameState === "PLAY") {
         snakeUpdate();
         snakeDraw();
         foodDraw();
@@ -84,10 +76,10 @@ function gameDraw() {
 }
 
 function gameRestart(){
-    snakeInitaliize();
-    foodInitaliize();
+    snakeInitialize();
+    foodInitialize();
     hideMenu(gameOverMenu);
-    setState("startScreen");
+    setState("PLAY");
 }
 
 /*-----------------------------------------------------------------------------
@@ -149,7 +141,7 @@ function snakeUpdate() {
  *-----------------------------------------------------------------------------
  */
 
-function foodInitaliize() {
+function foodInitialize() {
     food = {
         x: 0,
         y: 0
@@ -241,16 +233,17 @@ function displayMenu(menu){
 }
 
 function hideMenu(menu){
-    menu.style.visibility = "hiddden"; 
+    menu.style.visibility = "hidden"; 
 }
 
 function showMenu(state){
     if(state === "GAME OVER"){
         displayMenu(gameOverMenu);
     }
-    else if(state === "startScreen"){
+    else if(state === "PLAY"){
         displayMenu(playHUD);
     }
+    
 }
 
 function centerMenuPosition (menu){

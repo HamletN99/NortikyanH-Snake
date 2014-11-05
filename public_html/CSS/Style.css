@@ -1,38 +1,39 @@
+/* This is coding for my bodys page for margin and padding of it. */
 body{
     margin: 0;
     padding: 0;
 }
-
+/* This is ann id for the display of what kind of object I want.*/
 #game-screen{
     display: block;
 }
-
+/* These are ids for mmy playHud,startscreen and game overs postion and visibility of it. */
 #gameOver, #playHUD, #startScreen{
     position: absolute;
     visibility: hidden;
 }
-
+/* These are codes for make my font and color and how big the text what my choice is. */
 h1, h2, h3 {
     font-family: 'Permanent Marker', cursive;
     color: white;
     text-align: center;
 }
-
+/* This is my title for my  game over screen that makes the length and width of the text. */
 .title{
     font-size: 62px;
     margin-bottom: 0px;
     margin-top: 0px;
 }
-
+/* This is my restart button code of my id that makes my borders what I want. */
 #restartButton{
     border: 2px solid white;
     border-radius: 10px;
 }
-
+/* This is my restart button code of my id that makes my background color what I want. */
 #restartButton:hover {
     background-color: #009900;
 }
-
+/* This is my sccore board code of my id that makes the margin 0 px. */
 #scoreBoard{
     margin: 0px;
 }
