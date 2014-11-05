@@ -19,6 +19,7 @@ var gameOverMenu;
 var restartButton;
 var playHUD;
 var scoreBoard;
+var startScreen;
 
 /*-----------------------------------------------------------------------------
  * Executing Game Code
@@ -54,6 +55,8 @@ function gameInitialize() {
     
     playHUD = document.getElementById("playHUD");
     scoreBoard = document.getElementById("scoreBoard");
+    
+    startScreen = document.getElementById("startScreen");
     
     setState("PLAY");
 }
