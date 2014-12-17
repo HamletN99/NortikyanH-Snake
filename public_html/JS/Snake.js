@@ -16,7 +16,9 @@ var screenheight;
 
 var gameState;
 var gameOverMenu;
+var gameStartMenu;
 var restartButton;
+var startButton;
 var playHUD;
 var scoreBoard;
 var startScreen;
@@ -47,8 +49,14 @@ function gameInitialize() {
 
     document.addEventListener("keydown", keyboardHandler);
     
+    gameStartMenu = document.getElementById("Start-screen");
+    centerMenuPosition(gameStartMenu);
+    
     gameOverMenu = document.getElementById("gameOver");
     centerMenuPosition(gameOverMenu);
+    
+    startButton = document.getElementById("startButton");
+    startButton.addEventListener("click", gameRestart);
     
     restartButton = document.getElementById("restartButton");
     restartButton.addEventListener("click", gameRestart);
@@ -82,6 +90,14 @@ function gameRestart(){
     snakeInitialize();
     foodInitialize();
     hideMenu(gameOverMenu);
+    hideMenu(gameStartMenu);
+    setState("PLAY");
+}
+
+function gameStart(){
+    snakeInitialize();
+    foodInitialize();
+    hideMenu(gameStartMenu);
     setState("PLAY");
 }
 
@@ -201,6 +217,7 @@ function checkFoodCollisions(snakeHeadX, snakeHeadY) {
             y: 0
         });
         snakeLength++;
+        setFoodPosition();
     }
 }
 function checkWallCollisions(snakeHeadX, snakeHeadY) {
@@ -240,7 +257,9 @@ function hideMenu(menu){
 }
 
 function showMenu(state){
-    if(state === "GAME OVER"){
+    if(state === "Hamlet's Snake"){
+        displayMenu(gameStartMenu);
+    }else if(state === "GAME OVER"){
         displayMenu(gameOverMenu);
     }
     else if(state === "PLAY"){
